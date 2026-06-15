@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b14" />
+  <meta name="description" content="Private end-to-end encrypted ephemeral chat" />
+  <title>Shagun Workspace</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── Welcome Screen ──────────────────────────────────────────── -->
+    <section id="screen-welcome" class="screen active">
+      <!-- Animated background layer -->
+      <div class="w-bg">
+        <div class="w-orb w-orb-1"></div>
+        <div class="w-orb w-orb-2"></div>
+        <div class="w-orb w-orb-3"></div>
+        <div id="welcome-particles" class="w-particles-layer"></div>
+        <div class="w-sparkles">
+          <span class="w-sparkle" style="--d:0s;   --x:14%; --y:22%">✦</span>
+          <span class="w-sparkle" style="--d:.7s;  --x:78%; --y:16%">✧</span>
+          <span class="w-sparkle" style="--d:1.2s; --x:88%; --y:55%">✦</span>
+          <span class="w-sparkle" style="--d:.4s;  --x:22%; --y:66%">✧</span>
+          <span class="w-sparkle" style="--d:1.8s; --x:52%; --y:80%">✦</span>
+          <span class="w-sparkle" style="--d:.95s; --x:68%; --y:38%">✧</span>
+          <span class="w-sparkle" style="--d:2.1s; --x:8%;  --y:48%">✦</span>
+          <span class="w-sparkle" style="--d:1.5s; --x:92%; --y:30%">✧</span>
+          <span class="w-sparkle" style="--d:.3s;  --x:42%; --y:12%">✦</span>
+          <span class="w-sparkle" style="--d:2.5s; --x:35%; --y:88%">✧</span>
+        </div>
+      </div>
+
+      <!-- Centered content -->
+      <div class="w-content">
+        <!-- Animated icon with orbit rings -->
+        <div class="w-icon-ring">
+          <div class="w-ring w-ring-1"></div>
+          <div class="w-ring w-ring-2"></div>
+          <div class="w-icon-inner">
+            <div class="w-icon-glow"></div>
+            <span class="w-icon" aria-hidden="true">🔒</span>
+            <span class="w-icon-spark w-icon-spark-1">✦</span>
+            <span class="w-icon-spark w-icon-spark-2">✦</span>
+            <span class="w-icon-spark w-icon-spark-3">✦</span>
+          </div>
+        </div>
+
+        <!-- Text block -->
+        <div class="w-text">
+          <h1 class="w-title">Shagun Workspace</h1>
+          <p class="w-sub" id="welcome-sub">Welcome to Shagun Workspace</p>
+          <p class="w-msg" id="welcome-msg">Your most private conversations,<br>beautifully secured.</p>
+        </div>
+
+        <!-- Animated loading dots -->
+        <div class="w-loader" aria-hidden="true">
+          <span class="w-dot"></span>
+          <span class="w-dot"></span>
+          <span class="w-dot"></span>
+        </div>
+
+        <p class="w-skip">Tap anywhere to continue</p>
+      </div>
+    </section>
+
+    <!-- ── Auth Screen ───────────────────────────────────────────────── -->
+    <section id="screen-auth" class="screen">
+      <div class="auth-wrap">
+        <div class="auth-brand">
+          <div class="brand-icon">🔒</div>
+          <h1 class="brand-name">Shagun Workspace</h1>
+          <p class="brand-tag">Private · Encrypted · Self-destructing</p>
+        </div>
+
+        <div class="glass-card auth-card">
+          <div class="tab-row">
+            <button class="tab-btn active" data-tab="login">Sign In</button>
+            <button class="tab-btn" data-tab="register">Register</button>
+          </div>
+
+          <!-- Login tab -->
+          <div id="tab-login" class="tab-pane active">
+            <div class="form-group">
+              <input type="text" id="login-username" placeholder=" " autocomplete="username" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <label for="login-username">Username</label>
+            </div>
+            <div class="form-group">
+              <input type="password" id="login-password" placeholder=" " autocomplete="current-password" />
+              <label for="login-password">Password</label>
+            </div>
+            <p class="form-error" id="login-error"></p>
+            <button class="btn-primary" id="login-btn">Sign In</button>
+          </div>
+
+          <!-- Register tab -->
+          <div id="tab-register" class="tab-pane">
+            <div class="form-group">
+              <input type="text" id="reg-username" placeholder=" " autocomplete="username" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="32" />
+              <label for="reg-username">Choose a username</label>
+            </div>
+            <div class="form-group">
+              <input type="password" id="reg-password" placeholder=" " autocomplete="new-password" />
+              <label for="reg-password">Create a password</label>
+            </div>
+            <div class="form-group">
+              <input type="password" id="reg-confirm" placeholder=" " autocomplete="new-password" />
+              <label for="reg-confirm">Confirm password</label>
+            </div>
+            <p class="form-error" id="register-error"></p>
+            <button class="btn-primary" id="register-btn">Create Account</button>
+          </div>
+        </div>
+
+        <div class="auth-chips">
+          <span class="chip">🔐 E2E Encrypted</span>
+          <span class="chip">🔥 Auto-delete</span>
+          <span class="chip">🚫 No data stored</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Lobby Screen ──────────────────────────────────────────────── -->
+    <section id="screen-lobby" class="screen">
+      <div class="lobby-wrap">
+        <div class="lobby-topbar">
+          <div class="lobby-user">
+            <div class="user-avatar" id="lobby-avatar">?</div>
+            <span id="lobby-username" class="lobby-username-text">—</span>
+          </div>
+          <button class="btn-ghost-sm" id="logout-btn">Sign out</button>
+        </div>
+
+        <div class="lobby-hero">
+          <div class="lobby-icon-wrap">
+            <div class="lobby-icon-bg"></div>
+            <span class="lobby-icon">🔒</span>
+          </div>
+          <h2>Start a Private Chat</h2>
+          <p>Create a one-time encrypted room and share the link with one person.</p>
+          <button class="btn-primary btn-lg" id="create-room-btn">
+            <span class="btn-icon">✦</span> Create Private Room
+          </button>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature-row"><span class="feat-icon">🔐</span><span>End-to-end encrypted — server never sees your messages</span></div>
+          <div class="feature-row"><span class="feat-icon">🔥</span><span>Messages vanish 10 seconds after being read</span></div>
+          <div class="feature-row"><span class="feat-icon">👁</span><span>Zero message history stored anywhere</span></div>
+          <div class="feature-row"><span class="feat-icon">🛡️</span><span>Screenshot overlay protection</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Waiting Screen ────────────────────────────────────────────── -->
+    <section id="screen-waiting" class="screen">
+      <div class="waiting-wrap">
+        <div class="glass-card waiting-card">
+          <div class="pulse-wrap">
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+            <div class="pulse-ring pulse-ring-3"></div>
+            <span class="pulse-icon">🔒</span>
+          </div>
+          <h2>Waiting for your contact…</h2>
+          <p class="waiting-sub">Share this link — only one person can join:</p>
+
+          <div class="link-box">
+            <span id="room-url-display" class="link-text">—</span>
+            <button class="btn-copy" id="copy-link-btn">Copy</button>
+          </div>
+
+          <div class="name-section">
+            <label class="name-label">Your display name in this chat</label>
+            <div class="name-row">
+              <input type="text" id="display-name-input" class="input-sm" placeholder="Display name" maxlength="32" autocorrect="off" autocapitalize="off" />
+              <button class="btn-sm-primary" id="set-display-name-btn">Set</button>
+            </div>
+          </div>
+
+          <button class="btn-ghost-sm cancel-btn" id="cancel-room-btn">← Cancel</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Chat Screen ───────────────────────────────────────────────── -->
+    <section id="screen-chat" class="screen">
+      <div class="chat-app">
+
+        <!-- Header -->
+        <div class="chat-header">
+          <div class="chat-header-left">
+            <button class="btn-icon-round" id="back-btn" aria-label="Back">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            </button>
+            <div class="peer-avatar-wrap">
+              <div class="peer-avatar" id="peer-avatar">?</div>
+              <span class="online-dot" id="online-dot"></span>
+            </div>
+            <div class="peer-meta">
+              <span class="peer-name" id="chat-peer-name">Connecting…</span>
+              <span class="peer-status">🔒 End-to-end encrypted</span>
+            </div>
+          </div>
+          <div class="chat-header-right">
+            <button class="btn-icon-round" id="edit-identity-btn" aria-label="Edit your name" title="Change your display name">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Identity editor (collapsible) -->
+        <div class="identity-editor hidden" id="identity-editor">
+          <input type="text" id="new-display-name" class="input-sm" placeholder="Your new display name" maxlength="32" autocorrect="off" autocapitalize="off" />
+          <button class="btn-sm-primary" id="save-display-name-btn">Save</button>
+          <button class="btn-sm-ghost" id="cancel-identity-btn">Cancel</button>
+        </div>
+
+        <!-- Messages -->
+        <div class="messages-area" id="messages-area">
+          <div class="messages-inner" id="messages-inner">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Typing indicator -->
+        <div class="typing-hint" id="typing-hint" style="display:none"></div>
+
+        <!-- Input area -->
+        <div class="chat-input-area">
+          <div class="input-row">
+            <textarea
+              id="message-input"
+              class="message-textarea"
+              placeholder="Type a message…"
+              rows="1"
+              aria-label="Message"
+            ></textarea>
+            <button class="send-btn" id="send-btn" aria-label="Send" disabled>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+              </svg>
+            </button>
+          </div>
+          <p class="input-hint">Messages auto-delete 10s after reading · E2E encrypted</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Screenshot Overlay ────────────────────────────────────────── -->
+    <div id="screenshot-overlay" class="screenshot-overlay hidden">
+      <div class="overlay-inner">
+        <div class="overlay-icon">🛡️</div>
+        <h2>Content Hidden</h2>
+        <p>This conversation is private</p>
+      </div>
+    </div>
+
+  </div><!-- #app -->
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="crypto.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
